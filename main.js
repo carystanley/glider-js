@@ -72,19 +72,40 @@ var Rect = {
     } 
 };
 
+function clamp(val, min, max) {
+    return Math.max(Math.min(val, max), min);
+}
+
+var kGravity = 3
+var kHImpulse = 2
+var kVImpulse = 2
+var kNormalThrust = 5
+var kMaxHVel = 16
+
 var glider = {
     lives: 3,
+    vx: 0,
+    vy: 0,
+    gx: 0,
+    gy: 0,
     update: function () {
         var body = this.body;
 
-        body.y += 3;
-        var dx = 0;
         if (KeyboardInput.IsKeyDown(Keys.Left)) {
-            dx = -2;
+            this.gx = -kNormalThrust;
         } else if (KeyboardInput.IsKeyDown(Keys.Right)) {
-            dx = 2;
+            this.gx = kNormalThrust;
+        } else {
+            this.gx = 0;
         }
-        body.x += dx;
+        this.gy = kGravity;
+
+        this.vx = clamp(this.vx + clamp(this.gx - this.vx, -kHImpulse, kHImpulse), -kNormalThrust, kNormalThrust);
+        this.vy = clamp(this.vy + clamp(this.gy - this.vy, -kVImpulse, kVImpulse), -kMaxHVel, kGravity);
+
+        body.x += this.vx;
+        body.y += this.vy;
+
         if (body.y > GROUND) {
             this.die();
         }
