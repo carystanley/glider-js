@@ -150,32 +150,44 @@ var Glider = defineClass({
     }
 });
 
-var glider = new Glider();
+var Shadow = defineClass({
+    init: function(source) {
+        this.source = source;
+        this.body = {
+            w: 50,
+            h: 40,
+            x: 0,
+            y: GROUND-20
+        };
+    },
 
-var shadow = {
     update: function () {
         var body = this.body;
-        var gliderBody = glider.body;
-        body.x = gliderBody.x;
+        var sourceBody = this.source.body;
+        body.x = sourceBody.x;
     },
+
     render: function (ctx) {
         var body = this.body;
         ctx.fillStyle = 'black';
         ctx.fillRect(body.x, body.y, body.w, body.h);
-    },
-    body: {
-        w: 50,
-        h: 40,
-        x: 0,
-        y: GROUND-20
     }
-}
+});
 
-var ball = {
-    initialV: -5,
-    initialY: GROUND-30,
-    v: -5,
-    gravity: 0.1,
+var Ball = defineClass({
+    init: function () {
+        this.initialV = -5,
+        this.initialY = GROUND-30,
+        this.v = -5,
+        this.gravity = 0.1,
+        this.body = {
+            w: 30,
+            h: 30,
+            x: 100,
+            y: GROUND-30
+        }
+    },
+
     update: function () {
         var body = this.body;
 
@@ -187,17 +199,16 @@ var ball = {
             this.v = this.initialV;
         }
     },
+
     render: function (ctx) {
         var body = this.body;
         ctx.strokeRect(body.x, body.y, body.w, body.h);
-    },
-    body: {
-        w: 30,
-        h: 30,
-        x: 100,
-        y: GROUND-30
     }
-};
+});
+
+var glider = new Glider();
+var shadow = new Shadow(glider);
+var ball = new Ball();
 
 function mainloop(){
     stats.begin();
