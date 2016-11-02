@@ -85,12 +85,33 @@ var kVImpulse = 2
 var kNormalThrust = 5
 var kMaxHVel = 16
 
-var glider = {
-    lives: 3,
-    vx: 0,
-    vy: 0,
-    gx: 0,
-    gy: 0,
+function defineClass(descriptor) {
+    function Class() {
+        this.init.apply(this, arguments);
+        return this;
+    }
+    Class.prototype = {};
+    Object.keys(descriptor).forEach(function (method) {
+        Class.prototype[method] = descriptor[method];
+    });
+    return Class;
+};
+
+var Glider = defineClass({
+    init: function() {
+        this.lives = 3;
+        this.vx = 0;
+        this.vy = 0;
+        this.gx = 0;
+        this.gy = 0;
+        this.body = {
+            w: 50,
+            h: 30,
+            x: 0,
+           y: 0
+        };
+    },
+
     update: function () {
         var body = this.body;
 
@@ -113,6 +134,7 @@ var glider = {
             this.die();
         }
     },
+
     die: function() {
         var body = this.body;
         if (this.lives > 0) {
@@ -121,17 +143,14 @@ var glider = {
             body.x = 0;
         }
     },
+
     render: function (ctx) {
         var body = this.body;
         ctx.strokeRect(body.x, body.y, body.w, body.h);
-    },
-    body: {
-        w: 50,
-        h: 30,
-        x: 0,
-        y: 0
     }
-}
+});
+
+var glider = new Glider();
 
 var shadow = {
     update: function () {
