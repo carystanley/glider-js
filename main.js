@@ -18,19 +18,25 @@ function loadImage(url, options) {
     return image;
 }
 
+function renderTick(ctx) {
+    shadow.render(ctx);
+    glider.render(ctx);
+    ball.render(ctx);
+}
+
 function render() {
     var width = canvas.width;
     var height = canvas.height;
 
     backBufferContext.fillStyle="white";
     backBufferContext.fillRect(0, 0, width, height);
-    glider.render(backBufferContext);
-    ball.render(backBufferContext);
+    renderTick(backBufferContext);
     context.drawImage(backBuffer, 0, 0, width, height);
 }
 
 function update() {
     glider.update();
+    shadow.update();
     ball.update();
     if (Rect.overlap(glider.body, ball.body)) {
         glider.die();
@@ -127,6 +133,25 @@ var glider = {
         h: 30,
         x: 0,
         y: 0
+    }
+}
+
+var shadow = {
+    update: function () {
+        var body = this.body;
+        var gliderBody = glider.body;
+        body.x = gliderBody.x;
+    },
+    render: function (ctx) {
+        var body = this.body;
+        ctx.fillStyle = 'black';
+        ctx.fillRect(body.x, body.y, body.w, body.h);
+    },
+    body: {
+        w: 50,
+        h: 40,
+        x: 0,
+        y: GROUND-20
     }
 }
 
