@@ -40,8 +40,6 @@ function update() {
     }
 }
 
-var GROUND = 300;
-
 var canvas = document.getElementById('mainCanvas');
 var context = canvas.getContext('2d');
 var backBuffer = document.createElement("canvas");
@@ -58,6 +56,22 @@ stats.domElement.style.right = '0px';
 stats.domElement.style.top = '0px';
 document.body.appendChild(stats.domElement);
 KeyboardInput.Initialize();
+
+var glider = new Glider();
+var shadow = new Shadow(glider);
+var ball = new Ball();
+
+function mainloop(){
+    stats.begin();
+    update();
+    render();
+    stats.end();
+    requestAnimFrame(mainloop);
+};
+
+mainloop();
+
+};
 
 var Rect = {
     overlap: function(a, b) {
@@ -84,6 +98,7 @@ var kHImpulse = 2
 var kVImpulse = 2
 var kNormalThrust = 5
 var kMaxHVel = 16
+var GROUND = 300;
 
 class Glider {
     constructor () {
@@ -193,22 +208,6 @@ class Ball {
         ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
 }
-
-var glider = new Glider();
-var shadow = new Shadow(glider);
-var ball = new Ball();
-
-function mainloop(){
-    stats.begin();
-    update();
-    render();
-    stats.end();
-    requestAnimFrame(mainloop);
-};
-
-mainloop();
-
-};
 
 var Keys = {
     A: 65,
