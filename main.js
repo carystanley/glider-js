@@ -85,20 +85,8 @@ var kVImpulse = 2
 var kNormalThrust = 5
 var kMaxHVel = 16
 
-function defineClass(descriptor) {
-    function Class() {
-        this.init.apply(this, arguments);
-        return this;
-    }
-    Class.prototype = {};
-    Object.keys(descriptor).forEach(function (method) {
-        Class.prototype[method] = descriptor[method];
-    });
-    return Class;
-};
-
-var Glider = defineClass({
-    init: function() {
+class Glider {
+    constructor () {
         this.lives = 3;
         this.vx = 0;
         this.vy = 0;
@@ -110,9 +98,9 @@ var Glider = defineClass({
             x: 0,
            y: 0
         };
-    },
+    }
 
-    update: function () {
+    update () {
         var body = this.body;
 
         if (KeyboardInput.IsKeyDown(Keys.Left)) {
@@ -133,25 +121,25 @@ var Glider = defineClass({
         if (body.y > GROUND) {
             this.die();
         }
-    },
+    }
 
-    die: function() {
+    die () {
         var body = this.body;
         if (this.lives > 0) {
             this.lives--;
             body.y = 0;
             body.x = 0;
         }
-    },
+    }
 
-    render: function (ctx) {
+    render (ctx) {
         var body = this.body;
         ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
-});
+}
 
-var Shadow = defineClass({
-    init: function(source) {
+class Shadow {
+    constructor (source) {
         this.source = source;
         this.body = {
             w: 50,
@@ -159,23 +147,23 @@ var Shadow = defineClass({
             x: 0,
             y: GROUND-20
         };
-    },
+    }
 
-    update: function () {
+    update () {
         var body = this.body;
         var sourceBody = this.source.body;
         body.x = sourceBody.x;
-    },
+    }
 
-    render: function (ctx) {
+    render (ctx) {
         var body = this.body;
         ctx.fillStyle = 'black';
         ctx.fillRect(body.x, body.y, body.w, body.h);
     }
-});
+}
 
-var Ball = defineClass({
-    init: function () {
+class Ball {
+    constructor () {
         this.initialV = -5,
         this.initialY = GROUND-30,
         this.v = -5,
@@ -186,9 +174,9 @@ var Ball = defineClass({
             x: 100,
             y: GROUND-30
         }
-    },
+    }
 
-    update: function () {
+    update () {
         var body = this.body;
 
         body.y += this.v;
@@ -198,13 +186,13 @@ var Ball = defineClass({
             body.y = this.initialY;
             this.v = this.initialV;
         }
-    },
+    }
 
-    render: function (ctx) {
+    render (ctx) {
         var body = this.body;
         ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
-});
+}
 
 var glider = new Glider();
 var shadow = new Shadow(glider);
