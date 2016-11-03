@@ -113,9 +113,12 @@ class Glider {
             x: 0,
            y: 0
         };
+        this.dead = false;
     }
 
     update () {
+        if (this.dead) return;
+
         var body = this.body;
 
         if (KeyboardInput.IsKeyDown(Keys.Left)) {
@@ -144,10 +147,14 @@ class Glider {
             this.lives--;
             body.y = 0;
             body.x = 0;
+        } else {
+            this.dead = true;
         }
     }
 
     render (ctx) {
+        if (this.dead) return;
+
         var body = this.body;
         ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
@@ -165,12 +172,16 @@ class Shadow {
     }
 
     update () {
+        if (this.source.dead) return;
+
         var body = this.body;
         var sourceBody = this.source.body;
         body.x = sourceBody.x;
     }
 
     render (ctx) {
+        if (this.source.dead) return;
+
         var body = this.body;
         ctx.fillStyle = 'black';
         ctx.fillRect(body.x, body.y, body.w, body.h);
