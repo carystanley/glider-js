@@ -16,7 +16,6 @@ function loadImage(url, options) {
 }
 
 function renderTick(ctx) {
-    shadow.render(ctx);
     glider.render(ctx);
     ball.render(ctx);
 }
@@ -33,7 +32,6 @@ function render() {
 
 function update() {
     glider.update();
-    shadow.update();
     ball.update();
     if (Rect.overlap(glider.body, ball.body)) {
         glider.die();
@@ -58,7 +56,6 @@ document.body.appendChild(stats.domElement);
 KeyboardInput.Initialize();
 
 var glider = new Glider();
-var shadow = new Shadow(glider);
 var ball = new Ball({bounce: 5, x: 100, y: GROUND-30});
 
 function mainloop(){
@@ -156,35 +153,13 @@ class Glider {
         if (this.dead) return;
 
         var body = this.body;
-        ctx.strokeRect(body.x, body.y, body.w, body.h);
-    }
-}
 
-class Shadow {
-    constructor (source) {
-        this.source = source;
-        this.body = {
-            w: 50,
-            h: 40,
-            x: 0,
-            y: GROUND-20
-        };
-    }
-
-    update () {
-        if (this.source.dead) return;
-
-        var body = this.body;
-        var sourceBody = this.source.body;
-        body.x = sourceBody.x;
-    }
-
-    render (ctx) {
-        if (this.source.dead) return;
-
-        var body = this.body;
         ctx.fillStyle = 'black';
+        ctx.fillRect(body.x, GROUND-20, body.w, 40);
+
+        ctx.fillStyle = 'white';
         ctx.fillRect(body.x, body.y, body.w, body.h);
+        ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
 }
 
