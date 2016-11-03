@@ -1,3 +1,5 @@
+var Stats = require('Stats');
+
 window.onload = function() {
 var requestAnimFrame = window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||

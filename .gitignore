@@ -1,0 +1,9 @@
+# Node.js with Express and Stlyus
+/.monitor
+
+# nodejs npm modules
+/node_modules
+
+# Build files
+/docs/*
+

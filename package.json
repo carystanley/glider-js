@@ -3,14 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "browser": {
+    "Stats": "./src/lib/stats.min.js"
+  },
+  "browserify-shim": {
+    "Stats": {
+      "exports": "Stats"
+    }
+  },
   "dependencies": {
     "grunt": "^0.4.5"
   },
   "devDependencies": {
     "babelify": "^6.1.0",
+    "browserify-shim": "^3.8.12",
     "grunt": "^0.4.5",
-    "grunt-browserify": "^3.8.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-connect": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-open": "^0.2.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
