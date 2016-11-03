@@ -1,6 +1,10 @@
 import Stats from 'Stats';
 
+import Const from './const';
+
 import Ball from './entities/ball';
+import Glider from './entities/glider';
+
 import KeyboardInput from './utils/keyboardInput';
 import Keys from './utils/keys';
 
@@ -37,6 +41,15 @@ function render() {
 }
 
 function update() {
+
+    if (KeyboardInput.IsKeyDown(Keys.Left)) {
+        glider.control(-1);
+    } else if (KeyboardInput.IsKeyDown(Keys.Right)) {
+        glider.control(1);
+    } else {
+        glider.control(0);
+    }
+
     glider.update();
     ball.update();
     if (Rect.overlap(glider.body, ball.body)) {
@@ -62,7 +75,7 @@ document.body.appendChild(stats.domElement);
 KeyboardInput.Initialize();
 
 var glider = new Glider();
-var ball = new Ball({bounce: 5, x: 100, y: GROUND-30});
+var ball = new Ball({bounce: 5, x: 100, y: Const.Ground-30});
 
 function mainloop(){
     stats.begin();
@@ -92,79 +105,4 @@ var Rect = {
     } 
 };
 
-function clamp(val, min, max) {
-    return Math.max(Math.min(val, max), min);
-}
 
-var kGravity = 3
-var kHImpulse = 2
-var kVImpulse = 2
-var kNormalThrust = 5
-var kMaxHVel = 16
-var GROUND = 300;
-
-class Glider {
-    constructor () {
-        this.lives = 3;
-        this.vx = 0;
-        this.vy = 0;
-        this.gx = 0;
-        this.gy = 0;
-        this.body = {
-            w: 50,
-            h: 30,
-            x: 0,
-           y: 0
-        };
-        this.dead = false;
-    }
-
-    update () {
-        if (this.dead) return;
-
-        var body = this.body;
-
-        if (KeyboardInput.IsKeyDown(Keys.Left)) {
-            this.gx = -kNormalThrust;
-        } else if (KeyboardInput.IsKeyDown(Keys.Right)) {
-            this.gx = kNormalThrust;
-        } else {
-            this.gx = 0;
-        }
-        this.gy = kGravity;
-
-        this.vx = clamp(this.vx + clamp(this.gx - this.vx, -kHImpulse, kHImpulse), -kNormalThrust, kNormalThrust);
-        this.vy = clamp(this.vy + clamp(this.gy - this.vy, -kVImpulse, kVImpulse), -kMaxHVel, kGravity);
-
-        body.x += this.vx;
-        body.y += this.vy;
-
-        if (body.y > GROUND) {
-            this.die();
-        }
-    }
-
-    die () {
-        var body = this.body;
-        if (this.lives > 0) {
-            this.lives--;
-            body.y = 0;
-            body.x = 0;
-        } else {
-            this.dead = true;
-        }
-    }
-
-    render (ctx) {
-        if (this.dead) return;
-
-        var body = this.body;
-
-        ctx.fillStyle = 'black';
-        ctx.fillRect(body.x, GROUND-20, body.w, 40);
-
-        ctx.fillStyle = 'white';
-        ctx.fillRect(body.x, body.y, body.w, body.h);
-        ctx.strokeRect(body.x, body.y, body.w, body.h);
-    }
-}
