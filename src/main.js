@@ -1,4 +1,4 @@
-var Stats = require('Stats');
+import Stats from 'Stats';
 
 import Ball from './entities/ball';
 
