@@ -7,6 +7,7 @@ import Glider from './entities/glider';
 
 import KeyboardInput from './utils/keyboardInput';
 import Keys from './utils/keys';
+import * as Rect from './utils/rect';
 
 window.onload = function() {
 var requestAnimFrame = window.requestAnimationFrame ||
@@ -89,20 +90,5 @@ mainloop();
 
 };
 
-var Rect = {
-    overlap: function(a, b) {
-        var al = a.x; var bl = b.x; // left
-        var ar = al + a.w; var br = bl + b.w; // right
-        var at = a.y; var bt = b.y; // top
-        var ab = at + a.h; var bb = bt + b.h; // bottom
-
-        if (ab < bt) return false;
-        if (at > bb) return false;
-        if (ar < bl) return false;
-        if (al > br) return false;
-
-        return true;
-    } 
-};
 
 
