@@ -59,7 +59,7 @@ KeyboardInput.Initialize();
 
 var glider = new Glider();
 var shadow = new Shadow(glider);
-var ball = new Ball();
+var ball = new Ball({bounce: 5, x: 100, y: GROUND-30});
 
 function mainloop(){
     stats.begin();
@@ -178,16 +178,16 @@ class Shadow {
 }
 
 class Ball {
-    constructor () {
-        this.initialV = -5,
-        this.initialY = GROUND-30,
-        this.v = -5,
-        this.gravity = 0.1,
+    constructor (config) {
+        this.initialV = -config.bounce;
+        this.initialY = config.y;
+        this.v = this.initialV;
+        this.gravity = 0.1;
         this.body = {
             w: 30,
             h: 30,
-            x: 100,
-            y: GROUND-30
+            x: config.x,
+            y: this.initialY
         }
     }
 
