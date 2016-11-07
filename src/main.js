@@ -9,15 +9,8 @@ import Glider from './entities/glider';
 import KeyboardInput from './utils/keyboardInput';
 import Keys from './utils/keys';
 import * as Rect from './utils/rect';
-// import {requestAnimFrame} from './utils/timing';
+import {requestAnimFrame} from './utils/timing';
 import {loadImage} from './utils/resources';
-
-var requestAnimFrame = window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame    ||
-        function( callback ){
-            window.setTimeout(callback, 1000 / 60);
-        };
 
 window.onload = function() {
 
