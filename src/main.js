@@ -4,6 +4,7 @@ import Const from './const';
 
 import Ball from './entities/ball';
 import Shelf from './entities/shelf';
+import Vent from './entities/vent';
 import Glider from './entities/glider';
 
 import KeyboardInput from './utils/keyboardInput';
@@ -17,6 +18,7 @@ window.onload = function() {
 function renderTick(ctx) {
     glider.render(ctx);
     ball.render(ctx);
+    vent.render(ctx);
     shelf.render(ctx);
 }
 
@@ -42,6 +44,9 @@ function update() {
 
     glider.update();
     ball.update();
+    if (Rect.overlap(glider.body, vent.body)) {
+        glider.lift();
+    }
     if (Rect.overlap(glider.body, ball.body)) {
         glider.die();
     }
@@ -70,6 +75,7 @@ KeyboardInput.Initialize();
 var glider = new Glider();
 var ball = new Ball({bounce: 5, x: 100, y: Const.Ground-30});
 var shelf = new Shelf({x: 75, y: 120, w: 150});
+var vent = new Vent({x: 50, h: 200});
 
 function mainloop(){
     stats.begin();
