@@ -3,7 +3,7 @@ import Stats from 'Stats';
 import Const from './const';
 
 import Ball from './entities/ball';
-// import Shelf from './entities/shelf';
+import Shelf from './entities/shelf';
 import Glider from './entities/glider';
 
 import KeyboardInput from './utils/keyboardInput';
@@ -24,6 +24,7 @@ window.onload = function() {
 function renderTick(ctx) {
     glider.render(ctx);
     ball.render(ctx);
+    shelf.render(ctx);
 }
 
 function render() {
@@ -51,6 +52,9 @@ function update() {
     if (Rect.overlap(glider.body, ball.body)) {
         glider.die();
     }
+    if (Rect.overlap(glider.body, shelf.body)) {
+        glider.die();
+    }
 }
 
 var canvas = document.getElementById('mainCanvas');
@@ -72,7 +76,7 @@ KeyboardInput.Initialize();
 
 var glider = new Glider();
 var ball = new Ball({bounce: 5, x: 100, y: Const.Ground-30});
-// var shelf = new Shelf({x: 50, y: 100, w: 150});
+var shelf = new Shelf({x: 75, y: 120, w: 150});
 
 function mainloop(){
     stats.begin();
