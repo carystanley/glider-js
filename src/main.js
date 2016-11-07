@@ -3,13 +3,15 @@ import Stats from 'Stats';
 import Const from './const';
 
 import Ball from './entities/ball';
+// import Shelf from './entities/shelf';
 import Glider from './entities/glider';
 
 import KeyboardInput from './utils/keyboardInput';
 import Keys from './utils/keys';
 import * as Rect from './utils/rect';
+// import {requestAnimFrame} from './utils/timing';
+import {loadImage} from './utils/resources';
 
-window.onload = function() {
 var requestAnimFrame = window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame    ||
@@ -17,14 +19,7 @@ var requestAnimFrame = window.requestAnimationFrame ||
             window.setTimeout(callback, 1000 / 60);
         };
 
-function loadImage(url, options) {
-    options = options || {};
-    var image = new Image();
-    if (options.onload)
-        image.on('load', options.onload);
-    image.src = url;
-    return image;
-}
+window.onload = function() {
 
 function renderTick(ctx) {
     glider.render(ctx);
@@ -77,6 +72,7 @@ KeyboardInput.Initialize();
 
 var glider = new Glider();
 var ball = new Ball({bounce: 5, x: 100, y: Const.Ground-30});
+// var shelf = new Shelf({x: 50, y: 100, w: 150});
 
 function mainloop(){
     stats.begin();
@@ -89,6 +85,3 @@ function mainloop(){
 mainloop();
 
 };
-
-
-
