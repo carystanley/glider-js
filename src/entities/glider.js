@@ -14,6 +14,7 @@ export default class Glider {
             x: 0,
            y: 0
         };
+        this.damaged = false;
         this.dead = false;
     }
 
@@ -26,8 +27,13 @@ export default class Glider {
 
         var body = this.body;
 
-        this.vx = clamp(this.vx + clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
-        this.vy = clamp(this.vy + clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
+        if (this.damaged) {
+            this.vy = Const.Gravity;
+            this.vx = 0;
+        } else {
+            this.vx = clamp(this.vx + clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
+            this.vy = clamp(this.vy + clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
+        }
 
         body.x += this.vx;
         body.y += this.vy;
@@ -43,12 +49,21 @@ export default class Glider {
         this.gy = -Const.VImpulse;
     }
 
-    die () {
+    damage() {
+        this.damaged = true;
+    }
+
+    reset () {
         var body = this.body;
+        this.damaged = false;
+        body.y = 0;
+        body.x = 0;
+    }
+
+    die () {
         if (this.lives > 0) {
             this.lives--;
-            body.y = 0;
-            body.x = 0;
+            this.reset();
         } else {
             this.dead = true;
         }

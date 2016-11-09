@@ -48,10 +48,10 @@ function update() {
         glider.lift();
     }
     if (Rect.overlap(glider.body, ball.body)) {
-        glider.die();
+        glider.damage();
     }
     if (Rect.overlap(glider.body, shelf.body)) {
-        glider.die();
+        glider.damage();
     }
 }
 
