@@ -16,11 +16,11 @@ import {loadImage} from './utils/resources';
 window.onload = function() {
 
 function renderTick(ctx) {
-    glider.render(ctx);
-
+    glider.renderShadow(ctx);
     Room.entries.forEach(function(entity) {
         entity.render(ctx);
     });
+    glider.render(ctx);
 }
 
 function render() {

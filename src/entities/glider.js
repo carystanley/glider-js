@@ -73,12 +73,20 @@ export default class Glider {
         if (this.dead) return;
 
         var body = this.body;
-
-        ctx.fillStyle = 'black';
-        ctx.fillRect(body.x, Const.Ground-20, body.w, 40);
-
-        ctx.fillStyle = 'white';
+        if (this.damaged) {
+            ctx.fillStyle = 'red';
+        } else {
+            ctx.fillStyle = 'white';
+        }
         ctx.fillRect(body.x, body.y, body.w, body.h);
         ctx.strokeRect(body.x, body.y, body.w, body.h);
+    }
+
+    renderShadow (ctx) {
+        if (this.dead) return;
+
+        var body = this.body;
+        ctx.fillStyle = 'black';
+        ctx.fillRect(body.x, Const.Ground-20, body.w, 40);
     }
 }
