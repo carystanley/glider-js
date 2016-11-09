@@ -14,6 +14,9 @@ export default class Vent {
 
     render (ctx) {
         var body = this.body;
-        ctx.strokeRect(body.x, body.y, body.w, body.h);
+        ctx.fillStyle = 'blue';
+        ctx.globalAlpha = 0.25;
+        ctx.fillRect(body.x - 5, body.y, body.w + 10, body.h);
+        ctx.globalAlpha = 1;
     }
 }
