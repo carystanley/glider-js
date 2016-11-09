@@ -19,4 +19,8 @@ export default class Vent {
         ctx.fillRect(body.x - 5, body.y, body.w + 10, body.h);
         ctx.globalAlpha = 1;
     }
+
+    onCollide (glider) {
+        glider.lift();
+    }
 }

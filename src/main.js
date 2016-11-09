@@ -17,9 +17,10 @@ window.onload = function() {
 
 function renderTick(ctx) {
     glider.render(ctx);
-    ball.render(ctx);
-    vent.render(ctx);
-    shelf.render(ctx);
+
+    Room.entries.forEach(function(entity) {
+        entity.render(ctx);
+    });
 }
 
 function render() {
@@ -43,16 +44,12 @@ function update() {
     }
 
     glider.update();
-    ball.update();
-    if (Rect.overlap(glider.body, vent.body)) {
-        glider.lift();
-    }
-    if (Rect.overlap(glider.body, ball.body)) {
-        glider.damage();
-    }
-    if (Rect.overlap(glider.body, shelf.body)) {
-        glider.damage();
-    }
+    Room.entries.forEach(function(entity) {
+        entity.update();
+        if (Rect.overlap(glider.body, entity.body)) {
+            entity.onCollide(glider);
+        }
+    });
 }
 
 var canvas = document.getElementById('mainCanvas');
@@ -73,9 +70,13 @@ document.body.appendChild(stats.domElement);
 KeyboardInput.Initialize();
 
 var glider = new Glider();
-var ball = new Ball({bounce: 5, x: 100, y: Const.Ground-30});
-var shelf = new Shelf({x: 75, y: 120, w: 150});
-var vent = new Vent({x: 50, h: 200});
+var Room = {
+    entries: [
+        new Ball({bounce: 5, x: 100, y: Const.Ground-30}),
+        new Shelf({x: 75, y: 120, w: 150}),
+        new Vent({x: 50, h: 200})
+    ]
+};
 
 function mainloop(){
     stats.begin();

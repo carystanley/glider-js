@@ -28,4 +28,8 @@ export default class Ball {
         var body = this.body;
         ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
+
+    onCollide (glider) {
+        glider.damage();
+    }
 }
