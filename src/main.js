@@ -33,7 +33,7 @@ function render() {
     context.drawImage(backBuffer, 0, 0, width, height);
 }
 
-function update() {
+function update(dt) {
 
     if (KeyboardInput.IsKeyDown(Keys.Left)) {
         glider.control(-1);
@@ -43,9 +43,9 @@ function update() {
         glider.control(0);
     }
 
-    glider.update();
+    glider.update(dt);
     Room.entries.forEach(function(entity) {
-        entity.update();
+        entity.update(dt);
         if (Rect.overlap(glider.body, entity.body)) {
             entity.onCollide(glider);
         }
@@ -72,15 +72,18 @@ KeyboardInput.Initialize();
 var glider = new Glider();
 var Room = {
     entries: [
-        new Ball({bounce: 5, x: 100, y: Const.Ground-30}),
+        new Ball({bounce: 150, x: 100, y: Const.Ground-30}),
         new Shelf({x: 75, y: 120, w: 150}),
         new Vent({x: 50, h: 200})
     ]
 };
 
+var lastTime = Date.now();
 function mainloop(){
+    var startTime = Date.now();
     stats.begin();
-    update();
+    update(Math.min((startTime - lastTime) / 1000.0, .1)); // don't want to skip to many frames
+    lastTime = startTime;
     render();
     stats.end();
     requestAnimFrame(mainloop);

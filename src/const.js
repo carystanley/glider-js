@@ -1,8 +1,8 @@
 export default {
-    Gravity: 3,
-    HImpulse: 2,
-    VImpulse: 2,
-    NormalThrust: 5,
-    MaxHVel: 16,
+    Gravity: 90, // 3
+    HImpulse: 60, // 2
+    VImpulse: 60, // 2
+    NormalThrust: 150, // 5
+    MaxHVel: 480, // 16
     Ground: 300
 };

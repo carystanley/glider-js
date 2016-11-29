@@ -3,7 +3,7 @@ export default class Ball {
         this.initialV = -config.bounce;
         this.initialY = config.y;
         this.v = this.initialV;
-        this.gravity = 0.1;
+        this.gravity = 90;
         this.body = {
             w: 30,
             h: 30,
@@ -12,11 +12,11 @@ export default class Ball {
         }
     }
 
-    update () {
+    update (dt) {
         var body = this.body;
 
-        body.y += this.v;
-        this.v += this.gravity;
+        body.y += dt * this.v;
+        this.v += dt * this.gravity;
 
         if (body.y > this.initialY) {
             body.y = this.initialY;
