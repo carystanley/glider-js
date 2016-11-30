@@ -1,8 +1,11 @@
+let OriginalFramerate = 30;
+
 export default {
-    Gravity: 90, // 3
-    HImpulse: 60, // 2
-    VImpulse: 60, // 2
-    NormalThrust: 150, // 5
-    MaxHVel: 480, // 16
+    OriginalFramerate: OriginalFramerate,
+    Gravity: 3 * OriginalFramerate,
+    HImpulse: 2 * OriginalFramerate,
+    VImpulse: 2 * OriginalFramerate,
+    NormalThrust: 5 * OriginalFramerate,
+    MaxHVel: 16 * OriginalFramerate,
     Ground: 300
 };

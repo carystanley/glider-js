@@ -31,8 +31,8 @@ export default class Glider {
             this.vy = Const.Gravity;
             this.vx = 0;
         } else {
-            this.vx = clamp(this.vx + clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
-            this.vy = clamp(this.vy + clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
+            this.vx = clamp(this.vx + Const.OriginalFramerate * dt * clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
+            this.vy = clamp(this.vy + Const.OriginalFramerate * dt * clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
         }
 
         body.x += dt * this.vx;
