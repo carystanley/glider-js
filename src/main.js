@@ -5,6 +5,7 @@ import Const from './const';
 import Ball from './entities/ball';
 import Shelf from './entities/shelf';
 import Vent from './entities/vent';
+import Copter from './entities/copter';
 import Glider from './entities/glider';
 
 import KeyboardInput from './utils/keyboardInput';
@@ -74,7 +75,8 @@ var Room = {
     entries: [
         new Ball({bounce: 150, x: 100, y: Const.Ground-30}),
         new Shelf({x: 75, y: 120, w: 150}),
-        new Vent({x: 50, h: 200})
+        new Vent({x: 50, h: 200}),
+        new Copter({x: 200, dir: -1})
     ]
 };
 
