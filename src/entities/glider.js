@@ -9,10 +9,10 @@ export default class Glider {
         this.gx = 0;
         this.gy = 0;
         this.body = {
-            w: 50,
-            h: 30,
+            w: Const.GliderWidth,
+            h: Const.GliderHeight,
             x: 0,
-           y: 0
+            y: 0
         };
         this.damaged = false;
         this.dead = false;

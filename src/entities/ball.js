@@ -1,12 +1,14 @@
+import Const from '../const';
+
 export default class Ball {
     constructor (config) {
         this.initialV = -config.bounce;
         this.initialY = config.y;
         this.v = this.initialV;
-        this.gravity = 90;
+        this.gravity = Const.BallGravity;
         this.body = {
-            w: 30,
-            h: 30,
+            w: Const.BallWidth,
+            h: Const.BallHeight,
             x: config.x,
             y: this.initialY
         }
