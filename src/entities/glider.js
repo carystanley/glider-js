@@ -22,7 +22,7 @@ export default class Glider {
         this.gx = direction * Const.NormalThrust;
     }
 
-    update (dt) {
+    update () {
         if (this.dead) return;
 
         var body = this.body;
@@ -31,12 +31,12 @@ export default class Glider {
             this.vy = Const.Gravity;
             this.vx = 0;
         } else {
-            this.vx = clamp(this.vx + Const.OriginalFramerate * dt * clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
-            this.vy = clamp(this.vy + Const.OriginalFramerate * dt * clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
+            this.vx = clamp(this.vx + Const.OldFPS/Const.FPS * clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
+            this.vy = clamp(this.vy + Const.OldFPS/Const.FPS * clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
         }
 
-        body.x += dt * this.vx;
-        body.y += dt * this.vy;
+        body.x += this.vx;
+        body.y += this.vy;
 
         if (body.y > Const.Ground) {
             this.die();

@@ -12,11 +12,11 @@ export default class Ball {
         }
     }
 
-    update (dt) {
+    update () {
         var body = this.body;
 
-        body.x += dt * this.dir * Const.CopterHVel;
-        body.y += dt * Const.CopterVVel;
+        body.x += this.dir * Const.CopterHVel;
+        body.y += Const.CopterVVel;
 
         if (body.y > Const.Ground) {
             body.y = Const.Ceil;

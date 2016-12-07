@@ -14,11 +14,11 @@ export default class Ball {
         }
     }
 
-    update (dt) {
+    update () {
         var body = this.body;
 
-        body.y += dt * this.v;
-        this.v += dt * this.gravity;
+        body.y += this.v;
+        this.v += this.gravity;
 
         if (body.y > this.initialY) {
             body.y = this.initialY;

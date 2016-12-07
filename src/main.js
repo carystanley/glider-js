@@ -44,9 +44,9 @@ function update(dt) {
         glider.control(0);
     }
 
-    glider.update(dt);
+    glider.update();
     Room.entries.forEach(function(entity) {
-        entity.update(dt);
+        entity.update();
         if (Rect.overlap(glider.body, entity.body)) {
             entity.onCollide(glider);
         }
@@ -73,7 +73,7 @@ KeyboardInput.Initialize();
 var glider = new Glider();
 var Room = {
     entries: [
-        new Ball({bounce: 150, x: 100, y: Const.Ground-30}),
+        new Ball({bounce: 2.5, x: 100, y: Const.Ground-30}),
         new Shelf({x: 75, y: 120, w: 150}),
         new Vent({x: 50, h: 200}),
         new Copter({x: 200, dir: -1})
