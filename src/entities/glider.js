@@ -74,13 +74,10 @@ export default class Glider {
 
         var body = this.body;
         if (this.damaged) {
-            g.ctx.fillStyle = 'red';
+            g.drawSprite(body.x, body.y, 'gliderCrash');
         } else {
-            g.ctx.fillStyle = 'white';
+            g.drawSprite(body.x, body.y, (this.gx < 0) ? 'gliderBack' : 'glider');
         }
-        // ctx.fillRect(body.x, body.y, body.w, body.h);
-        // ctx.strokeRect(body.x, body.y, body.w, body.h);
-        g.drawSprite(body.x, body.y, (this.gx < 0) ? 'gliderBack' : 'glider');
     }
 
     renderShadow (g) {
