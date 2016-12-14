@@ -19,22 +19,16 @@ import Graphics from './utils/graphics';
 
 window.onload = function() {
 
-function renderTick() {
-    glider.renderShadow(mainGraphics);
+function render(g) {
+    g.clear();
+
+    glider.renderShadow(g);
     Room.entries.forEach(function(entity) {
-        entity.render(mainGraphics);
+        entity.render(g);
     });
-    glider.render(mainGraphics);
-}
+    glider.render(g);
 
-function render() {
-    var width = canvas.width;
-    var height = canvas.height;
-
-    backBufferContext.fillStyle="white";
-    backBufferContext.fillRect(0, 0, width, height);
-    renderTick();
-    context.drawImage(backBuffer, 0, 0, width, height);
+    g.push();
 }
 
 function update(dt) {
@@ -56,17 +50,8 @@ function update(dt) {
     });
 }
 
-var canvas = document.getElementById('mainCanvas');
-var context = canvas.getContext('2d');
-var backBuffer = document.createElement("canvas");
-backBuffer.width = canvas.width;
-backBuffer.height = canvas.height;
-var backBufferContext = backBuffer.getContext("2d");
-// var enemy = loadImage('./enemy.gif');
-// var pattern = loadImage('./pattern.png');
 var stats = new Stats();
-
-var mainGraphics = new Graphics(backBufferContext, loadSprites({
+var mainGraphics = new Graphics(document.getElementById('mainCanvas'), loadSprites({
     "glider.gif": loadImage('glider.gif')
 }, SpriteConfig));
 
@@ -93,7 +78,7 @@ function mainloop(){
     stats.begin();
     update(Math.min((startTime - lastTime) / 1000.0, .1)); // don't want to skip to many frames
     lastTime = startTime;
-    render();
+    render(mainGraphics);
     stats.end();
     requestAnimFrame(mainloop);
 };
