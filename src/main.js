@@ -31,7 +31,7 @@ function render(g) {
     g.push();
 }
 
-function update(dt) {
+function update() {
 
     if (KeyboardInput.IsKeyDown(Keys.Left)) {
         glider.control(-1);
@@ -74,10 +74,8 @@ var Room = {
 
 var lastTime = Date.now();
 function mainloop(){
-    var startTime = Date.now();
     stats.begin();
-    update(Math.min((startTime - lastTime) / 1000.0, .1)); // don't want to skip to many frames
-    lastTime = startTime;
+    update();
     render(mainGraphics);
     stats.end();
     requestAnimFrame(mainloop);
