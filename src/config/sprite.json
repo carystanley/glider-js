@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "image": "glider.gif"
+  },
+  "frames": {
+    "glider" : {
+      "frame": {"x": 1, "y": 2, "w":46, "h": 18},
+      "origin": {"x": 0, "y": 0}
+    },
+    "gliderBack" : {
+      "frame": {"x": 1, "y": 27, "w":47, "h": 20},
+      "origin": {"x": 0, "y": 0}
+    },
+    "gliderShadow" : {
+      "frame": {"x": 4, "y": 60, "w":41, "h": 13},
+      "origin": {"x": 0, "y": 0}
+    }
+  }
+}

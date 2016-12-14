@@ -12,16 +12,22 @@ import KeyboardInput from './utils/keyboardInput';
 import Keys from './utils/keys';
 import * as Rect from './utils/rect';
 import {requestAnimFrame} from './utils/timing';
-import {loadImage} from './utils/resources';
+import {loadImage, loadSprites} from './utils/resources';
+
+import SpriteConfig from './config/sprite.json';
+
+var Sprites = loadSprites({
+    "glider.gif": loadImage('glider.gif')
+}, SpriteConfig);
 
 window.onload = function() {
 
 function renderTick(ctx) {
-    glider.renderShadow(ctx);
+    glider.renderShadow(ctx, Sprites);
     Room.entries.forEach(function(entity) {
-        entity.render(ctx);
+        entity.render(ctx, Sprites);
     });
-    glider.render(ctx);
+    glider.render(ctx, Sprites);
 }
 
 function render() {
