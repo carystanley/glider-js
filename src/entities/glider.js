@@ -84,8 +84,6 @@ export default class Glider {
         if (this.dead) return;
 
         var body = this.body;
-        // ctx.fillStyle = 'black';
-        // ctx.fillRect(body.x, Const.Ground-20, body.w, 40);
         g.drawSprite(body.x, Const.Ground, 'gliderShadow');
     }
 }

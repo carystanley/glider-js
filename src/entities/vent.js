@@ -14,6 +14,7 @@ export default class Vent {
 
     render (g) {
         var body = this.body;
+        g.drawSprite(body.x, body.y + body.h, 'vent');
         g.ctx.fillStyle = 'blue';
         g.ctx.globalAlpha = 0.25;
         g.ctx.fillRect(body.x - 5, body.y, body.w + 10, body.h);
