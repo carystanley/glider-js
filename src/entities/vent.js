@@ -12,12 +12,12 @@ export default class Vent {
 
     update () {}
 
-    render (ctx) {
+    render (g) {
         var body = this.body;
-        ctx.fillStyle = 'blue';
-        ctx.globalAlpha = 0.25;
-        ctx.fillRect(body.x - 5, body.y, body.w + 10, body.h);
-        ctx.globalAlpha = 1;
+        g.ctx.fillStyle = 'blue';
+        g.ctx.globalAlpha = 0.25;
+        g.ctx.fillRect(body.x - 5, body.y, body.w + 10, body.h);
+        g.ctx.globalAlpha = 1;
     }
 
     onCollide (glider) {

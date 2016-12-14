@@ -10,9 +10,9 @@ export default class Shelf {
 
     update () {}
 
-    render (ctx) {
+    render (g) {
         var body = this.body;
-        ctx.strokeRect(body.x, body.y, body.w, body.h);
+        g.ctx.strokeRect(body.x, body.y, body.w, body.h);
     }
 
     onCollide (glider) {

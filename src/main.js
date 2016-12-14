@@ -15,19 +15,16 @@ import {requestAnimFrame} from './utils/timing';
 import {loadImage, loadSprites} from './utils/resources';
 
 import SpriteConfig from './config/sprite.json';
-
-var Sprites = loadSprites({
-    "glider.gif": loadImage('glider.gif')
-}, SpriteConfig);
+import Graphics from './utils/graphics';
 
 window.onload = function() {
 
-function renderTick(ctx) {
-    glider.renderShadow(ctx, Sprites);
+function renderTick() {
+    glider.renderShadow(mainGraphics);
     Room.entries.forEach(function(entity) {
-        entity.render(ctx, Sprites);
+        entity.render(mainGraphics);
     });
-    glider.render(ctx, Sprites);
+    glider.render(mainGraphics);
 }
 
 function render() {
@@ -36,7 +33,7 @@ function render() {
 
     backBufferContext.fillStyle="white";
     backBufferContext.fillRect(0, 0, width, height);
-    renderTick(backBufferContext);
+    renderTick();
     context.drawImage(backBuffer, 0, 0, width, height);
 }
 
@@ -68,6 +65,10 @@ var backBufferContext = backBuffer.getContext("2d");
 // var enemy = loadImage('./enemy.gif');
 // var pattern = loadImage('./pattern.png');
 var stats = new Stats();
+
+var mainGraphics = new Graphics(backBufferContext, loadSprites({
+    "glider.gif": loadImage('glider.gif')
+}, SpriteConfig));
 
 stats.setMode(0);
 stats.domElement.style.position = 'absolute';

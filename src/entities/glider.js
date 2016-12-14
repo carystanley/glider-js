@@ -1,6 +1,5 @@
 import Const from '../const';
 import {clamp} from '../utils/helpers';
-import {drawSprite} from '../utils/sprite';
 
 export default class Glider {
     constructor () {
@@ -70,26 +69,26 @@ export default class Glider {
         }
     }
 
-    render (ctx, sprites) {
+    render (g) {
         if (this.dead) return;
 
         var body = this.body;
         if (this.damaged) {
-            ctx.fillStyle = 'red';
+            g.ctx.fillStyle = 'red';
         } else {
-            ctx.fillStyle = 'white';
+            g.ctx.fillStyle = 'white';
         }
         // ctx.fillRect(body.x, body.y, body.w, body.h);
         // ctx.strokeRect(body.x, body.y, body.w, body.h);
-        drawSprite(ctx, body.x, body.y, (this.gx < 0) ? 'gliderBack' : 'glider', sprites);
+        g.drawSprite(body.x, body.y, (this.gx < 0) ? 'gliderBack' : 'glider');
     }
 
-    renderShadow (ctx, sprites) {
+    renderShadow (g) {
         if (this.dead) return;
 
         var body = this.body;
         // ctx.fillStyle = 'black';
         // ctx.fillRect(body.x, Const.Ground-20, body.w, 40);
-        drawSprite(ctx, body.x, Const.Ground, 'gliderShadow', sprites);
+        g.drawSprite(body.x, Const.Ground, 'gliderShadow');
     }
 }
