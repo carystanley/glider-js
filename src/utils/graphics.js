@@ -24,7 +24,7 @@ export default class Graphics {
         this.ctx.drawImage(
             sheet,
             x, y, w, h,
-            Math.round(destX - origin.x), Math.round(destY) - origin.y, w, h
+            Math.round(destX - origin.x), Math.round(destY - origin.y), w, h
         );
     }
 
