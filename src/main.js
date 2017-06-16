@@ -1,5 +1,3 @@
-import Stats from 'Stats';
-
 import Const from './const';
 
 import Ball from './entities/ball';
