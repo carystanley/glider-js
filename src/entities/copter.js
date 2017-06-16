@@ -1,4 +1,5 @@
 import Const from '../const';
+import { animate } from '../utils/sprite';
 
 export default class Ball {
     constructor (config) {
@@ -10,6 +11,7 @@ export default class Ball {
             x: this.initialX,
             y: Const.Ceil
         }
+        this.count = 0;
     }
 
     update () {
@@ -22,11 +24,12 @@ export default class Ball {
             body.y = Const.Ceil;
             body.x = this.initialX;
         }
+        this.count++;
     }
 
     render (g) {
         var body = this.body;
-        g.ctx.strokeRect(body.x, body.y, body.w, body.h);
+        g.drawSprite(body.x, body.y, 'copter' + animate(this.count, 4, 8));
     }
 
     onCollide (glider) {
