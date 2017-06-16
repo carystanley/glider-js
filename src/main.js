@@ -1,3 +1,5 @@
+/* global Stats */
+
 import Const from './const';
 
 import Ball from './entities/ball';
@@ -18,7 +20,7 @@ import Graphics from './utils/graphics';
 window.onload = function() {
     var stats = new Stats();
     var mainGraphics = new Graphics(document.getElementById('mainCanvas'), loadSprites({
-        "glider.gif": loadImage('glider.gif')
+        'glider.gif': loadImage('glider.gif')
     }, SpriteConfig));
 
     stats.setMode(0);
@@ -51,7 +53,6 @@ window.onload = function() {
     }
 
     function update() {
-
         if (KeyboardInput.IsKeyDown(Keys.Left)) {
             glider.control(-1);
         } else if (KeyboardInput.IsKeyDown(Keys.Right)) {
@@ -69,7 +70,6 @@ window.onload = function() {
         });
     }
 
-    var lastTime = Date.now();
     function mainloop(){
         stats.begin();
         update();
@@ -79,5 +79,4 @@ window.onload = function() {
     };
 
     mainloop();
-
 };
