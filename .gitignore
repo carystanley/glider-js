@@ -7,3 +7,5 @@
 # Build files
 /docs/*
 
+app.js
+app.js.map
