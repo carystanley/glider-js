@@ -23,7 +23,7 @@ export default class Glider {
     }
 
     update () {
-        if (this.dead) return;
+        if (this.dead) { return; }
 
         var body = this.body;
 
@@ -31,8 +31,10 @@ export default class Glider {
             this.vy = Const.Gravity;
             this.vx = 0;
         } else {
-            this.vx = clamp(this.vx + Const.OldFPS/Const.FPS * clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
-            this.vy = clamp(this.vy + Const.OldFPS/Const.FPS * clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
+            this.vx = clamp(this.vx + Const.OldFPS/Const.FPS *
+                clamp(this.gx - this.vx, -Const.HImpulse, Const.HImpulse), -Const.NormalThrust, Const.NormalThrust);
+            this.vy = clamp(this.vy + Const.OldFPS/Const.FPS *
+                clamp(this.gy - this.vy, -Const.VImpulse, Const.VImpulse), -Const.MaxHVel, Const.Gravity);
         }
 
         body.x += this.vx;
@@ -70,7 +72,7 @@ export default class Glider {
     }
 
     render (g) {
-        if (this.dead) return;
+        if (this.dead) { return; }
 
         var body = this.body;
         if (this.damaged) {
@@ -81,7 +83,7 @@ export default class Glider {
     }
 
     renderShadow (g) {
-        if (this.dead) return;
+        if (this.dead) { return; }
 
         var body = this.body;
         g.drawSprite(body.x, Const.Ground, 'gliderShadow');

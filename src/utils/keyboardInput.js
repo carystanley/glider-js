@@ -8,8 +8,9 @@ export default {
     },
 
     IsKeyDown: function(key) {
-        if (this.Pressed[key] != null)
+        if (this.Pressed[key] != null) {
             return this.Pressed[key];
+        }
         return false;
     },
 
@@ -25,7 +26,7 @@ export default {
 
     PreventScrolling: function(event) {
         // 37: left, 38: up, 39: right, 40: down
-        if(event.keyCode >= 37 && event.keyCode <= 40){
+        if (event.keyCode >= 37 && event.keyCode <= 40) {
             event.preventDefault();
         }
     }

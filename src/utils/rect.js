@@ -5,10 +5,10 @@ export function overlap(a, b) {
     var at = a.y; var bt = b.y; // top
     var ab = at + a.h; var bb = bt + b.h; // bottom
 
-    if (ab < bt) return false;
-    if (at > bb) return false;
-    if (ar < bl) return false;
-    if (al > br) return false;
+    if (ab < bt) { return false; }
+    if (at > bb) { return false; }
+    if (ar < bl) { return false; }
+    if (al > br) { return false; }
 
     return true;
 };

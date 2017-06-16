@@ -9,10 +9,10 @@ export default class Graphics {
         this.height = canvas.height;
 
         this.displayContext = canvas.getContext('2d');
-        this.bufferCanvas = document.createElement("canvas");
+        this.bufferCanvas = document.createElement('canvas');
         this.bufferCanvas.width = this.width;
         this.bufferCanvas.height = this.height;
-        this.ctx = this.bufferCanvas.getContext("2d");
+        this.ctx = this.bufferCanvas.getContext('2d');
     }
 
     drawSprite(destX, destY, frame) {
@@ -29,7 +29,7 @@ export default class Graphics {
     }
 
     clear() {
-        this.ctx.fillStyle="white";
+        this.ctx.fillStyle = 'white';
         this.ctx.fillRect(0, 0, this.width, this.height);
     }
 
