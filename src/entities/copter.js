@@ -1,6 +1,11 @@
 import Const from '../const';
 import { animate } from '../utils/sprite';
 
+let frames = [
+    'copter0', 'copter1', 'copter2', 'copter3',
+    'copter4', 'copter5', 'copter6', 'copter7'
+];
+
 export default class Ball {
     constructor (config) {
         this.initialX = config.x;
@@ -29,7 +34,7 @@ export default class Ball {
 
     render (g) {
         var body = this.body;
-        g.drawSprite(body.x, body.y, 'copter' + animate(this.count, 4, 8));
+        g.drawSprite(body.x, body.y, frames[animate(this.count, 4, frames.length)]);
     }
 
     onCollide (glider) {
