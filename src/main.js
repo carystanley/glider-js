@@ -17,17 +17,22 @@ import {loadImage, loadSprites} from './utils/resources';
 import SpriteConfig from './config/sprite.json';
 import Graphics from './utils/graphics';
 
-window.onload = function() {
+function statsBootstrap() {
     var stats = new Stats();
-    var mainGraphics = new Graphics(document.getElementById('mainCanvas'), loadSprites({
-        'glider.gif': loadImage('glider.gif')
-    }, SpriteConfig));
-
     stats.setMode(0);
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.right = '0px';
     stats.domElement.style.top = '0px';
     document.body.appendChild(stats.domElement);
+    return stats;
+}
+
+window.onload = function() {
+    var stats = statsBootstrap();
+    var mainGraphics = new Graphics(document.getElementById('mainCanvas'), loadSprites({
+        'glider.gif': loadImage('glider.gif')
+    }, SpriteConfig));
+
     KeyboardInput.Initialize();
 
     var glider = new Glider();
