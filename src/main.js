@@ -27,6 +27,34 @@ function statsBootstrap() {
     return stats;
 }
 
+var EntityTypes = {
+    ball: Ball,
+    shelf: Shelf,
+    vent: Vent,
+    copter: Copter
+}
+
+var Rooms = [{
+    entities: [
+        {type: 'ball', bounce: 2.5, x: 100, y: Const.Ground-30},
+        {type: 'shelf', x: 75, y: 120, w: 150},
+        {type: 'vent', x: 50, h: 200},
+        {type: 'copter', x: 200, dir: -1},
+        {type: 'vent', x: 250, h: 200}
+    ]
+}];
+
+function loadLevel(id) {
+    var room = Rooms[id] || {};
+    var entities = room.entities || [];
+    return {
+        entities: entities.map(function (meta) {
+            return new (EntityTypes[meta.type])(meta)
+        })
+    };
+}
+
+
 window.onload = function() {
     var stats = statsBootstrap();
     var mainGraphics = new Graphics(document.getElementById('mainCanvas'), loadSprites({
@@ -35,21 +63,14 @@ window.onload = function() {
 
     KeyboardInput.Initialize();
 
+    var Room = loadLevel(0);
     var glider = new Glider();
-    var Room = {
-        entries: [
-            new Ball({bounce: 2.5, x: 100, y: Const.Ground-30}),
-            new Shelf({x: 75, y: 120, w: 150}),
-            new Vent({x: 50, h: 200}),
-            new Copter({x: 200, dir: -1})
-        ]
-    };
 
     function render(g) {
         g.clear();
 
         glider.renderShadow(g);
-        Room.entries.forEach(function(entity) {
+        Room.entities.forEach(function(entity) {
             entity.render(g);
         });
         glider.render(g);
@@ -67,7 +88,7 @@ window.onload = function() {
         }
 
         glider.update();
-        Room.entries.forEach(function(entity) {
+        Room.entities.forEach(function(entity) {
             entity.update();
             if (Rect.overlap(glider.body, entity.body)) {
                 entity.onCollide(glider);
